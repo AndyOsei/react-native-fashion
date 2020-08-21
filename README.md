@@ -1,8 +1,8 @@
-# REACT NATIVE FASHION
+## REACT NATIVE FASHION
 
 My version of react-native-fashion built as i journeyed with @wcdillon on his YouTube channel building the Outfitr UI Kit...was inspired alot by the techniques he used when building this incredible UI Kit in React Native.
 
-## SETUP
+### SETUP
 
 - clone the project
     ```
@@ -15,6 +15,6 @@ My version of react-native-fashion built as i journeyed with @wcdillon on his Yo
     ```
 - Choose any of the options to either run on Android / IOS
 
-## License
+### License
 
 MIT, see [LICENSE.md](https://https://github.com/AndyOsei/react-native-fashion/blob/master/LICENSE.md) for details.
