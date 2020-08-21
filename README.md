@@ -6,7 +6,7 @@ My version of react-native-fashion built as i journeyed with @wcdillon on his Yo
 
 - clone the project
     ```
-    git clone https://github.com/AndyOsei/react-native-meetio
+    git clone https://github.com/AndyOsei/react-native-fashion
     ```
 - install dependencies and run app
     ```
