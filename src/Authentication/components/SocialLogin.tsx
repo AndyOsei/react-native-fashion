@@ -2,13 +2,11 @@
 import React, { ReactNode } from "react";
 import Svg, { Path } from "react-native-svg";
 
-import { Box, theme } from "../../components";
+import { Box, useTheme } from "../../components";
 
 interface SocialIconProps {
   children: ReactNode;
 }
-
-const SIZE = theme.borderRadii.l * 2;
 
 const Google = () => (
   <Svg viewBox="0 0 48 48" width={24} height={24}>
@@ -49,19 +47,24 @@ const Apple = () => (
   </Svg>
 );
 
-const SocialIcon = ({ children }: SocialIconProps) => (
-  <Box
-    marginHorizontal="s"
-    backgroundColor="white"
-    width={SIZE}
-    height={SIZE}
-    borderRadius="l"
-    justifyContent="center"
-    alignItems="center"
-  >
-    {children}
-  </Box>
-);
+const SocialIcon = ({ children }: SocialIconProps) => {
+  const theme = useTheme();
+
+  const SIZE = theme.borderRadii.l * 2;
+  return (
+    <Box
+      marginHorizontal="s"
+      backgroundColor="white"
+      width={SIZE}
+      height={SIZE}
+      borderRadius="l"
+      justifyContent="center"
+      alignItems="center"
+    >
+      {children}
+    </Box>
+  );
+};
 
 const SocialLogin = () => {
   return (

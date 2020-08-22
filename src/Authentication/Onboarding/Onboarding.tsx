@@ -8,7 +8,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { interpolateColor, useScrollHandler } from "react-native-redash";
 
-import { theme } from "../../components";
+import { makeStyles, Theme } from "../../components";
 import { Routes, StackNavigationProps } from "../../components/Navigation";
 
 import Slide, { SLIDE_HEIGHT } from "./Slide";
@@ -17,7 +17,7 @@ import Dot from "./Dot";
 
 const { width } = Dimensions.get("window");
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     flex: 1,
     backgroundColor: "white",
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: theme.borderRadii.xl,
     overflow: "hidden",
   },
-});
+}));
 
 const slides = [
   {
@@ -97,6 +97,7 @@ export const assets = slides.map((slide) => slide.picture.src);
 const Onboarding = ({
   navigation,
 }: StackNavigationProps<Routes, "Onboarding">) => {
+  const styles = useStyles();
   const scroll = useRef<Animated.ScrollView>(null);
   const { scrollHandler, x } = useScrollHandler();
   const backgroundColor = interpolateColor(x, {

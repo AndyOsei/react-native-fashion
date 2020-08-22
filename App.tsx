@@ -6,7 +6,8 @@ import {
   assets as authenticationAssets,
   AuthenticationNavigator,
 } from "./src/Authentication";
-import { LoadAsset, theme } from "./src/components";
+import { LoadAsset } from "./src/components";
+import { theme } from "./src/components/Theme";
 
 const assets = [...authenticationAssets];
 
