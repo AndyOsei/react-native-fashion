@@ -5,6 +5,7 @@ import * as Font from "expo-font";
 import { InitialState, NavigationContainer } from "@react-navigation/native";
 import Constants from "expo-constants";
 import { AsyncStorage } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 const NAVIGATION_STATE_KEY = `NAVIGATION_STATE_KEY-${Constants.manifest.sdkVersion}`;
 
@@ -64,6 +65,7 @@ const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
   }
   return (
     <NavigationContainer {...{ onStateChange, initialState }}>
+      <StatusBar />
       {children}
     </NavigationContainer>
   );

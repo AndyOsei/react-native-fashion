@@ -1,4 +1,4 @@
-import React, { forwardRef, RefObject } from "react";
+import React, { forwardRef } from "react";
 import {
   TextInput as RNTextInput,
   StyleSheet,
@@ -14,8 +14,8 @@ interface TextInputProps extends RNTextInputProps {
   error?: string;
 }
 
-const TextInput = forwardRef(
-  ({ icon, error, touched, ...props }: TextInputProps, ref) => {
+const TextInput = forwardRef<RNTextInput, TextInputProps>(
+  ({ icon, error, touched, ...props }, ref) => {
     const theme = useTheme();
     const reColor = !touched ? "text" : error ? "danger" : "primary";
     const color = theme.colors[reColor];

@@ -1,11 +1,11 @@
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 
-import { Box, Text, Button } from "../../components";
-import { Routes, StackNavigationProps } from "../../components/Navigation";
+import { Box, Text, Button } from "../components";
+import { Routes, StackNavigationProps } from "../components/Navigation";
 
 const picture = {
-  src: require("../../../assets/5.png"),
+  src: require("../../assets/5.png"),
 };
 
 export const assets = [picture.src];
