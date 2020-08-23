@@ -2,12 +2,15 @@ import React, { useRef } from "react";
 import { TextInput as RNTextInput } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { BorderlessButton } from "react-native-gesture-handler";
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 import { Container, Box, Button, Text } from "../components";
-import { StackNavigationProps, Routes } from "../components/Navigation";
+import { AuthenticationRoutes, AppRoutes } from "../components/Navigation";
+import TextInput from "../components/Form/TextInput";
+import Checkbox from "../components/Form/Checkbox";
 
-import TextInput from "./components/Form/TextInput";
-import Checkbox from "./components/Form/Checkbox";
 import Footer from "./components/Footer";
 
 const LoginSchema = Yup.object().shape({
@@ -15,7 +18,14 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().min(6).required(),
 });
 
-const Login = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
+interface LoginProps {
+  navigation: CompositeNavigationProp<
+    StackNavigationProp<AuthenticationRoutes, "Login">,
+    StackNavigationProp<AppRoutes>
+  >;
+}
+
+const Login = ({ navigation }: LoginProps) => {
   const {
     handleChange,
     handleBlur,
@@ -27,7 +37,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
   } = useFormik({
     validationSchema: LoginSchema,
     initialValues: { email: "", password: "", remember: false },
-    onSubmit: (data) => console.log(data),
+    onSubmit: () => navigation.navigate("Home"),
   });
   const password = useRef<RNTextInput>(null);
 
@@ -40,7 +50,7 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
   );
 
   return (
-    <Container {...{ footer }}>
+    <Container pattern={0} {...{ footer }}>
       <Box padding="xl">
         <Text variant="title1" textAlign="center" marginBottom="l">
           Welcome back
@@ -78,18 +88,23 @@ const Login = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
             onSubmitEditing={() => handleSubmit()}
             secureTextEntry
           />
-          <Box flexDirection="row" justifyContent="space-between">
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            marginVertical="s"
+          >
             <Checkbox
               label="Remember me"
               checked={values.remember}
               onChange={() => setFieldValue("remember", !values.remember)}
             />
-            <Button
-              variant="transparent"
+            <BorderlessButton
               onPress={() => navigation.navigate("ForgotPassword")}
             >
-              <Text color="primary">Forgot password</Text>
-            </Button>
+              <Text variant="button" color="primary">
+                Forgot password
+              </Text>
+            </BorderlessButton>
           </Box>
           <Box alignItems="center" marginTop="m">
             <Button

@@ -9,17 +9,19 @@ import { Box, useTheme } from "./Theme";
 interface ContainerProps {
   children: ReactNode;
   footer: ReactNode;
+  pattern: 0;
 }
 
-export const assets = [require("../../assets/patterns/1.png")];
+export const assets = [require("../../assets/patterns/1.png")] as const;
 
 const { width, height: wHeight } = Dimensions.get("window");
 const aspectRatio = 3200 / 2400;
 const height = width * aspectRatio;
 
-const Container = ({ children, footer }: ContainerProps) => {
+const Container = ({ children, pattern, footer }: ContainerProps) => {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
+  const asset = assets[pattern];
   return (
     <KeyboardAwareScrollView scrollEnabled={false}>
       <Box
@@ -35,7 +37,7 @@ const Container = ({ children, footer }: ContainerProps) => {
             height={height * 0.3}
           >
             <Image
-              source={assets[0]}
+              source={asset}
               style={{
                 width,
                 height,
@@ -46,7 +48,7 @@ const Container = ({ children, footer }: ContainerProps) => {
         </Box>
         <Box flex={1} overflow="hidden">
           <Image
-            source={assets[0]}
+            source={asset}
             style={{
               ...StyleSheet.absoluteFillObject,
               width,

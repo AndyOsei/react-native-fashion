@@ -4,9 +4,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { Container, Box, Button, Text } from "../components";
-import { StackNavigationProps, Routes } from "../components/Navigation";
+import {
+  StackNavigationProps,
+  AuthenticationRoutes,
+} from "../components/Navigation";
+import TextInput from "../components/Form/TextInput";
 
-import TextInput from "./components/Form/TextInput";
 import Footer from "./components/Footer";
 
 const SignUpSchema = Yup.object().shape({
@@ -18,12 +21,14 @@ const SignUpSchema = Yup.object().shape({
   ),
 });
 
-const SignUp = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
+const SignUp = ({
+  navigation,
+}: StackNavigationProps<AuthenticationRoutes, "Welcome">) => {
   const { handleChange, handleBlur, handleSubmit, errors, touched } = useFormik(
     {
       validationSchema: SignUpSchema,
       initialValues: { email: "", password: "", remember: false },
-      onSubmit: (data) => console.log(data),
+      onSubmit: () => navigation.navigate("Home"),
     }
   );
   const password = useRef<RNTextInput>(null);
@@ -38,7 +43,7 @@ const SignUp = ({ navigation }: StackNavigationProps<Routes, "Welcome">) => {
   );
 
   return (
-    <Container {...{ footer }}>
+    <Container pattern={0} {...{ footer }}>
       <Box padding="xl">
         <Text variant="title1" textAlign="center" marginBottom="l">
           Create Account
