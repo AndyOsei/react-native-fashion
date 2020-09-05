@@ -16,6 +16,10 @@ export const theme = {
     danger: "#FF0058",
     gray: "rgba(12, 13, 52, 0.05)",
     slideGray: "#F4F0EF",
+    yellow: "yellow",
+    orange: "orange",
+    violet: "violet",
+    pink: "pink",
   },
   spacing: {
     s: 8,

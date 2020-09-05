@@ -3,11 +3,9 @@ import { TextInput as RNTextInput } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BorderlessButton } from "react-native-gesture-handler";
-import { CompositeNavigationProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 
 import { Container, Box, Button, Text } from "../components";
-import { AuthenticationRoutes, AppRoutes } from "../components/Navigation";
+import { AuthNavigationProps } from "../components/Navigation";
 import TextInput from "../components/Form/TextInput";
 import Checkbox from "../components/Form/Checkbox";
 
@@ -18,14 +16,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().min(6).required(),
 });
 
-interface LoginProps {
-  navigation: CompositeNavigationProp<
-    StackNavigationProp<AuthenticationRoutes, "Login">,
-    StackNavigationProp<AppRoutes>
-  >;
-}
-
-const Login = ({ navigation }: LoginProps) => {
+const Login = ({ navigation }: AuthNavigationProps<"Login">) => {
   const {
     handleChange,
     handleBlur,
@@ -51,68 +42,66 @@ const Login = ({ navigation }: LoginProps) => {
 
   return (
     <Container pattern={0} {...{ footer }}>
-      <Box padding="xl">
-        <Text variant="title1" textAlign="center" marginBottom="l">
-          Welcome back
-        </Text>
-        <Text variant="body" textAlign="center" marginBottom="l">
-          Use your credentials below and login to your account
-        </Text>
-        <Box>
-          <Box marginBottom="m">
-            <TextInput
-              icon="mail"
-              placeholder="Enter your Email"
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              error={errors.email}
-              touched={touched.email}
-              autoCompleteType="email"
-              autoCapitalize="none"
-              returnKeyType="next"
-              returnKeyLabel="next"
-              onSubmitEditing={() => password.current?.focus()}
-            />
-          </Box>
+      <Text variant="title1" textAlign="center" marginBottom="l">
+        Welcome back
+      </Text>
+      <Text variant="body" textAlign="center" marginBottom="l">
+        Use your credentials below and login to your account
+      </Text>
+      <Box>
+        <Box marginBottom="m">
           <TextInput
-            ref={password}
-            icon="lock"
-            placeholder="Enter your Password"
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            error={errors.password}
-            touched={touched.password}
+            icon="mail"
+            placeholder="Enter your Email"
+            onChangeText={handleChange("email")}
+            onBlur={handleBlur("email")}
+            error={errors.email}
+            touched={touched.email}
+            autoCompleteType="email"
             autoCapitalize="none"
-            returnKeyType="go"
-            returnKeyLabel="go"
-            onSubmitEditing={() => handleSubmit()}
-            secureTextEntry
+            returnKeyType="next"
+            returnKeyLabel="next"
+            onSubmitEditing={() => password.current?.focus()}
           />
-          <Box
-            flexDirection="row"
-            justifyContent="space-between"
-            marginVertical="s"
+        </Box>
+        <TextInput
+          ref={password}
+          icon="lock"
+          placeholder="Enter your Password"
+          onChangeText={handleChange("password")}
+          onBlur={handleBlur("password")}
+          error={errors.password}
+          touched={touched.password}
+          autoCapitalize="none"
+          returnKeyType="go"
+          returnKeyLabel="go"
+          onSubmitEditing={() => handleSubmit()}
+          secureTextEntry
+        />
+        <Box
+          flexDirection="row"
+          justifyContent="space-between"
+          marginVertical="s"
+        >
+          <Checkbox
+            label="Remember me"
+            checked={values.remember}
+            onChange={() => setFieldValue("remember", !values.remember)}
+          />
+          <BorderlessButton
+            onPress={() => navigation.navigate("ForgotPassword")}
           >
-            <Checkbox
-              label="Remember me"
-              checked={values.remember}
-              onChange={() => setFieldValue("remember", !values.remember)}
-            />
-            <BorderlessButton
-              onPress={() => navigation.navigate("ForgotPassword")}
-            >
-              <Text variant="button" color="primary">
-                Forgot password
-              </Text>
-            </BorderlessButton>
-          </Box>
-          <Box alignItems="center" marginTop="m">
-            <Button
-              variant="primary"
-              label="Login to your account"
-              onPress={handleSubmit}
-            />
-          </Box>
+            <Text variant="button" color="primary">
+              Forgot password
+            </Text>
+          </BorderlessButton>
+        </Box>
+        <Box alignItems="center" marginTop="m">
+          <Button
+            variant="primary"
+            label="Login to your account"
+            onPress={handleSubmit}
+          />
         </Box>
       </Box>
     </Container>

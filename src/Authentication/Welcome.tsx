@@ -3,10 +3,7 @@ import { Image, StyleSheet } from "react-native";
 import { BorderlessButton } from "react-native-gesture-handler";
 
 import { Box, Text, Button } from "../components";
-import {
-  AuthenticationRoutes,
-  StackNavigationProps,
-} from "../components/Navigation";
+import { AuthNavigationProps } from "../components/Navigation";
 
 const picture = {
   src: require("../../assets/5.png"),
@@ -14,9 +11,7 @@ const picture = {
 
 export const assets = [picture.src];
 
-const Welcome = ({
-  navigation,
-}: StackNavigationProps<AuthenticationRoutes, "Welcome">) => {
+const Welcome = ({ navigation }: AuthNavigationProps<"Welcome">) => {
   return (
     <Box flex={1} backgroundColor="white">
       <Box
