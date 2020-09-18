@@ -1,7 +1,9 @@
+import { DrawerContentComponentProps } from "@react-navigation/drawer";
+import { DrawerActions } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Dimensions, Image } from "react-native";
 
-import { Box, Text, RoundedIconButton } from "../../components";
+import { Box, Text, Header } from "../../components";
 import { theme } from "../../components/Theme";
 
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
@@ -50,7 +52,7 @@ const items: DrawerItemProps[] = [
   },
 ];
 
-const Drawer = () => {
+const Drawer = (props: DrawerContentComponentProps) => {
   return (
     <Box flex={1}>
       <Box flex={0.2} backgroundColor="white">
@@ -58,27 +60,16 @@ const Drawer = () => {
           {...StyleSheet.absoluteFillObject}
           borderBottomRightRadius="xl"
           backgroundColor="secondary"
-          flexDirection="row"
-          paddingTop="xl"
-          paddingHorizontal="m"
-          justifyContent="space-between"
         >
-          <RoundedIconButton
-            name="x"
-            size={24}
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => true}
-          />
-          <Text variant="body" color="white">
-            MY PROFILE
-          </Text>
-          <RoundedIconButton
-            size={24}
-            name="shopping-bag"
-            color="white"
-            backgroundColor="secondary"
-            onPress={() => true}
+          <Header
+            title="Menu"
+            left={{
+              icon: "x",
+              onPress: () =>
+                props.navigation.dispatch(DrawerActions.closeDrawer()),
+            }}
+            right={{ icon: "shopping-bag", onPress: () => true }}
+            dark
           />
         </Box>
       </Box>

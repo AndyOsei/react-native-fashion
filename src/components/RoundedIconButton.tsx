@@ -9,7 +9,7 @@ interface RoundedIconButtonProps extends RoundedIconProps {
 
 const RoundedIconButton = ({ onPress, ...props }: RoundedIconButtonProps) => {
   return (
-    <RectButton {...{ onPress }}>
+    <RectButton {...{ borderRadius: props.size / 2, onPress }}>
       <RoundedIcon {...props} />
     </RectButton>
   );
